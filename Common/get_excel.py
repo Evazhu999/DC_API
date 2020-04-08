@@ -13,4 +13,5 @@ print(table.rows_values(0))#取第一行的数据
 print(table.col_values(0))#取第一列的数据
 print(table.cell_values(0,1))#取第一行第一列的数据，前面是行后面是列
 for i in range(1,table.nrows):
-    print(table.cell_values(i,1),table.cell_values(i,2))
+    print(table.cell_values(i,1),table.cell_values(i,2))bang
+    'zuibang'
