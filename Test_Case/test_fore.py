@@ -18,8 +18,7 @@ login_data={"mobile":"917838381868","code":"123456","phone_code":'91'}
 login_url= requests.post(server_ip()+'/api/auth/login',json=login_data)
 print('登录成功：',login_url.text)
 #商户新建接口
-add_product_Authorization=login_url
-add_product_Authorization=login_url.json().get('data')
+'''add_product_Authorization=
 print('Authorization返回的结果是:',(add_product_Authorization))
 add_product_data={
 	"name": "timestamp",
@@ -29,7 +28,7 @@ add_product_data={
 	"min_rate":1.2,
 	"max_rate":2.2,
 	"url":"http://172.16.40.4:9091/business/?env=inte132&url=http%253A%252F%252F172.16.40.4%253A9091%252Fbusiness%252F%253Fenv%253Dinte132%2523%252Fhome#/edit",
-	"intro":"它是接口自动化测试数据",
+	"intro":"这是接口自动化测试数据",
 	"auto":0
 }
 add_product_url=requests.post(server_ip()+'/api/merchant',json=add_product_data,headers=add_product_Authorization)
@@ -37,6 +36,8 @@ print('商户新建产品返回的结果是',(add_product_url.json()))
 #access_token=login_url
 #login_token=login_url.json().get('data')
 #print(login_token)    {'Content-Type':'application/json','Accept-Language':'zh','token':'login_token'}
+
+'''
 #c端首页检查
 apply_url=requests.get(server_ip()+'/api/apply')
 print('c端首页查询结果：',apply_url.text,apply_url.encoding)
