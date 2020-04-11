@@ -5,22 +5,38 @@
 @File    : test_fore.py
 '''
 import requests
-#import time
+import time
 from Config.conf import  *
+import json
+import random
+
+#随机手机号
+phone_end = ''.join(random.sample('1234567890',8))
+phone_no = '9178' + phone_end
 #商户后台--商户相关接口
-sms_data={"mobile":"917838381868","phone_code":91}#短信发送接口
+# sms_data={"mobile":"917838381867","phone_code":91}#短信发送接口
+sms_data={"mobile":phone_no,"phone_code":91}#短信发送接口
+
 sms_url= requests.post(server_ip()+'/api/auth/sms',json=sms_data)
 print('验证码已发送：',sms_url.text)
 #print(sms_url.status_code)
-#time.sleep(3)
+#time.sleep()
 #login接口
-login_data={"mobile":"917838381868","code":"123456","phone_code":'91'}
+# login_data={"mobile":"917838381867","code":"123456","phone_code":'91'}
+login_data={"mobile":phone_no,"code":"123456","phone_code":'91'}
+
 login_url= requests.post(server_ip()+'/api/auth/login',json=login_data)
 print('登录成功：',login_url.text)
 #商户新建接口
-add_product_Authorization=login_url
-add_product_Authorization=login_url.json().get('data')
-print('Authorization返回的结果是:',(add_product_Authorization))
+add_product_Authorization=json.loads(login_url.text)['data']['access_token']
+# print('Authorization返回的结果是:',(add_product_Authorization))
+add_product_headers={
+'Accept-Language': 'zh' ,
+'Authorization': 'Bearer '+ add_product_Authorization ,
+'Content-Type': 'application/json' ,
+'X-UDID': 'qwertyuii'
+}
+# print(add_product_headers)
 add_product_data={
 	"name": "timestamp",
 	"logo":"",
@@ -32,7 +48,7 @@ add_product_data={
 	"intro":"它是接口自动化测试数据",
 	"auto":0
 }
-add_product_url=requests.post(server_ip()+'/api/merchant',json=add_product_data,headers=add_product_Authorization)
+add_product_url=requests.post(server_ip()+'/api/merchant',json=add_product_data,headers=add_product_headers)
 print('商户新建产品返回的结果是',(add_product_url.json()))
 #access_token=login_url
 #login_token=login_url.json().get('data')
