@@ -9,7 +9,7 @@ import time
 from Config.conf import  *
 import json
 import random
-#from Common.get_sql import *
+from Common.get_sql import *
 #随机手机号
 phone_end = ''.join(random.sample('1234567890',8))
 phone_no = '9178' + phone_end
@@ -56,13 +56,13 @@ bd_check_headers={'Accept-Language': 'zh' ,
 'Content-Type': 'application/json' ,
 'X-UDID': 'qwertyuii'
 }
-#id=get_sql('select id from merchant_product order by id desc limit 1')[0][0]
+id=str(get_sql('select id from merchant_product order by id desc limit 1')[0][0])
 bd_check_data={
-	"status":"accept"
+	'status':'accept'
 }
-bd_check_url=requests.put(server_ip()+'/api/bd/',headers=bd_check_headers)
+bd_check_url=requests.put(server_ip()+'/api/bd/'+ id, params=bd_check_data,headers=bd_check_headers)
 print('bd审核商品：',bd_check_url.text)
 
 #c端首页检查
-apply_url=requests.get(server_ip()+'/api/apply/id')
+apply_url=requests.get(server_ip()+'/api/apply')
 print('c端首页查询结果：',apply_url.text,apply_url.encoding)

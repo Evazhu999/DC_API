@@ -20,5 +20,5 @@ def get_sql(sql):
   cursor.close()#关闭游标
   db.close()#关闭数据库连接
   return data
-print(get_sql('select id from merchant_product order by  id desc limit 1'))#运行的sql语句
+#print(get_sql('select id from merchant_product order by  id desc limit 1'))#运行的sql语句
 

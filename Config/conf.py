@@ -10,11 +10,11 @@ def server_ip():
     sit_ip='https://m.maxrupees.com/client/app/business/index.html#/login'
     return dev_ip
 def sql_conf():
-    host = '10.10.10.132',
-    user = 'qsq',
-    password = 'BstK3nP5jeu29jvy',
-    port = 3306,
-    database = 'maxrupees',
+    host = '10.10.10.132'
+    user = 'qsq'
+    password = 'BstK3nP5jeu29jvy'
+    port = 3306
+    database = 'maxrupees'
     charset = 'utf8'
     return host,user,password,port,database,charset
 #print('host','user','password','port','database','charset')
