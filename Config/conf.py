@@ -15,6 +15,7 @@ def sql_conf():
     password = 'BstK3nP5jeu29jvy',
     port = 3306,
     database = 'maxrupees',
-    charset = 'utf-8'
+    charset = 'utf8'
     return host,user,password,port,database,charset
+#print('host','user','password','port','database','charset')
 
