@@ -9,7 +9,7 @@ import time
 from Config.conf import  *
 import json
 import random
-
+from Common.get_sql import *
 #随机手机号
 phone_end = ''.join(random.sample('1234567890',8))
 phone_no = '9178' + phone_end
@@ -50,9 +50,18 @@ add_product_data={
 }
 add_product_url=requests.post(server_ip()+'/api/merchant',json=add_product_data,headers=add_product_headers)
 print('商户新建产品返回的结果是',(add_product_url.json()))
-#access_token=login_url
-#login_token=login_url.json().get('data')
-#print(login_token)    {'Content-Type':'application/json','Accept-Language':'zh','token':'login_token'}
+#bd审核
+bd_check_headers={'Accept-Language': 'zh' ,
+'Authorization': 'Bearer '+ 'NfSe1pMoDC1k_X4Pe0hrt7sul_Y2pYqLZeBoxxCb' ,
+'Content-Type': 'application/json' ,
+'X-UDID': 'qwertyuii'
+}
+bd_check_data={
+	"status":"accept"
+}
+bd_check_url=requests.put(server_ip()+'/api/bd/',headers=bd_check_headers)
+print('bd审核商品：',bd_check_url.text)
+
 #c端首页检查
 apply_url=requests.get(server_ip()+'/api/apply')
 print('c端首页查询结果：',apply_url.text,apply_url.encoding)
