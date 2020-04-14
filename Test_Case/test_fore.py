@@ -11,8 +11,8 @@ from Config.conf import  *
 from Common.get_sql import *
 from Common.phone import *
 #商户后台-验证码接口
-sms_data={"mobile":get_phone(),"phone_code":91}#短信发送接口
-print(sms_data)
+phone=get_phone()
+sms_data={"mobile":phone,"phone_code":91}#短信发送接口
 sms_url= requests.post(server_ip()+'/api/auth/sms',json=sms_data)
 try:
    assert sms_url.status_code==200
@@ -21,14 +21,10 @@ except:
    assert sms_url.status_code!= 200
    print('error：验证码发送失败')
 #login接口
-login_data={"mobile":get_phone(),"phone_code":'91',"code":"123456",}
-#login_data=
-print('login数据：',login_data)
-login_url= requests.post(server_ip()+'/api/auth/login',json=login_data)
-print('登录成功：',login_url.text)
+sms_data['code']='123456'
+login_url= requests.post(server_ip()+'/api/auth/login',json=sms_data)
 #商户新建接口
 add_product_Authorization=json.loads(login_url.text)['data']['access_token']
-# print('Authorization返回的结果是:',(add_product_Authorization))
 add_product_headers={
 'Accept-Language': 'zh' ,
 'Authorization': 'Bearer '+ add_product_Authorization ,
