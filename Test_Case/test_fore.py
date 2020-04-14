@@ -5,26 +5,25 @@
 @File    : test_fore.py
 '''
 import requests
-import time
-from Config.conf import  *
 import json
-import random
+import re
+from Config.conf import  *
 from Common.get_sql import *
-#随机手机号
-phone_end = ''.join(random.sample('1234567890',8))
-phone_no = '9178' + phone_end
-#商户后台--商户相关接口
-# sms_data={"mobile":"917838381867","phone_code":91}#短信发送接口
-sms_data={"mobile":phone_no,"phone_code":91}#短信发送接口
-
+from Common.phone import *
+#商户后台-验证码接口
+sms_data={"mobile":get_phone(),"phone_code":91}#短信发送接口
+print(sms_data)
 sms_url= requests.post(server_ip()+'/api/auth/sms',json=sms_data)
-print('验证码已发送：',sms_url.text)
-#print(sms_url.status_code)
-#time.sleep()
+try:
+   assert sms_url.status_code==200
+   #print('验证码已发送：',sms_url.text)
+except:
+   assert sms_url.status_code!= 200
+   print('error：验证码发送失败')
 #login接口
-# login_data={"mobile":"917838381867","code":"123456","phone_code":'91'}
-login_data={"mobile":phone_no,"code":"123456","phone_code":'91'}
-
+login_data={"mobile":get_phone(),"phone_code":'91',"code":"123456",}
+#login_data=
+print('login数据：',login_data)
 login_url= requests.post(server_ip()+'/api/auth/login',json=login_data)
 print('登录成功：',login_url.text)
 #商户新建接口
@@ -62,7 +61,8 @@ bd_check_data={
 }
 bd_check_url=requests.put(server_ip()+'/api/bd/'+ id, params=bd_check_data,headers=bd_check_headers)
 print('bd审核商品：',bd_check_url.text)
+assert bd_check_url.status_code==200
+assert get_sql('select id from merchant_product order by id desc limit 1')
 
-#c端首页检查
 apply_url=requests.get(server_ip()+'/api/apply')
-print('c端首页查询结果：',apply_url.text,apply_url.encoding)
+print('c端首页查询结果：',apply_url.text,apply_url.json())
