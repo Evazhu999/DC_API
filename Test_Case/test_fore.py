@@ -21,8 +21,9 @@ except:
    assert sms_url.status_code!= 200
    print('error：验证码发送失败')
 #login接口
-sms_data['code']='123456'
+sms_data['code']=get_sql('select * from sms order by id desc limit 1')
 login_url= requests.post(server_ip()+'/api/auth/login',json=sms_data)
+assert 'access_token' in login_url.content.decode('unicode_escape')
 #商户新建接口
 add_product_Authorization=json.loads(login_url.text)['data']['access_token']
 add_product_headers={
