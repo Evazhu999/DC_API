@@ -11,7 +11,7 @@ from Config.conf import  *
 from Common.get_sql import *
 from Common.phone import *
 
-class TestClass:
+class TestClass():
     def test_send_sms(self):
      phone = get_phone()
      sms_data = {"mobile": phone, "phone_code": 91}  # 短信发送接口
@@ -22,8 +22,9 @@ class TestClass:
      except:
       assert sms_url.status_code != 200
       print('error：验证码发送失败')
-     return
+     return sms_data
     def test_login(self):
-     self.test_send_sms(self)['code'] ='123456'
-     login_url = requests.post(server_ip() + '/api/auth/login', json=self.test_send_sms(self))
+     sms=self.test_send_sms()
+     sms['code'] ='123456'
+     login_url = requests.post(server_ip() + '/api/auth/login', json=sms)
      assert 'access_token' in login_url.content.decode('unicode_escape')

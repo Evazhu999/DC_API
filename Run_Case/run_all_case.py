@@ -7,4 +7,4 @@
 import pytest
 if __name__ == '__main__':
     #pytest.main(['../Test_Case/test_case.py','--html=../report/report1.html','--junitxml=../report/report.xml','--alluredir','../report/reportallure/'])
-    pytest.main(['../Test_Case/test_case.py','-s', '-q', '--alluredir', '../report/reportallure/'])
+    pytest.main(['../Test_Case/test_case.py','-s', '-q', '--alluredir', '../report/testreportallure/'])
