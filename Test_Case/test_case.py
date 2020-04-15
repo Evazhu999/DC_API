@@ -15,8 +15,8 @@ class TestClass:
     def test_send_sms(self):
      phone = get_phone()
      sms_data = {"mobile": phone, "phone_code": 91}  # 短信发送接口
-     sms_url = requests.post(server_ip() + '/api/auth/sms', json=sms_data)
      try:
+      sms_url = requests.post(server_ip() + '/api/auth/sms', json=sms_data)
       assert sms_url.status_code == 200
     # print('验证码已发送：',sms_url.text)
      except:

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite errors="0" failures="1" hostname="AdeMacBook-Air.local" name="pytest" skipped="0" tests="2" time="1.073" timestamp="2020-04-14T21:41:38.909511"><testcase classname="Test_Case.test_case.TestClass" file="Test_Case/test_case.py" line="14" name="test_send_sms" time="0.735"></testcase><testcase classname="Test_Case.test_case.TestClass" file="Test_Case/test_case.py" line="25" name="test_login" time="0.081"><failure message="TypeError: test_send_sms() takes 1 positional argument but 2 were given">self = &lt;Test_Case.test_case.TestClass object at 0x106d3add0&gt;
+
+    def test_login(self):
+&gt;    self.test_send_sms(&apos;sms_data&apos;)[&apos;code&apos;] = get_sql(&apos;select * from sms order by id desc limit 1&apos;)
+E    TypeError: test_send_sms() takes 1 positional argument but 2 were given
+
+../Test_Case/test_case.py:27: TypeError</failure></testcase></testsuite></testsuites>

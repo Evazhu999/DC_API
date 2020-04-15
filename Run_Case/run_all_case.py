@@ -6,4 +6,5 @@
 #@Time : 2020/4/14 13:01
 import pytest
 if __name__ == '__main__':
-    pytest.main(['../Test_Case/test_case.py','--html=../report/report1.html'])
+    #pytest.main(['../Test_Case/test_case.py','--html=../report/report1.html','--junitxml=../report/report.xml','--alluredir','../report/reportallure/'])
+    pytest.main(['../Test_Case/test_case.py','-s', '-q', '--alluredir', '../report/reportallure/'])
