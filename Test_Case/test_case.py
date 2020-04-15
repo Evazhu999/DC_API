@@ -24,6 +24,6 @@ class TestClass:
       print('error：验证码发送失败')
      return
     def test_login(self):
-     self.test_send_sms('sms_data')['code'] = get_sql('select * from sms order by id desc limit 1')
-     login_url = requests.post(server_ip() + '/api/auth/login', json=self.test_send_sms('sms_data'))
+     self.test_send_sms(self)['code'] ='123456'
+     login_url = requests.post(server_ip() + '/api/auth/login', json=self.test_send_sms(self))
      assert 'access_token' in login_url.content.decode('unicode_escape')
